@@ -16,14 +16,6 @@ When("I fill in valid registration details", () => {
   SignUpPage.fillConfirmPassword(testPassword);
 });
 
-When("I submit the signup form", () => {
-  SignUpPage.submit();
-});
-
-Then("I should see success message or logged in", () => {
-  cy.contains('Thank you for registering').should('exist');
-});
-
 When("I enter user details with mismatched passwords", () => {
   SignUpPage.fillFirstName('Test');
   SignUpPage.fillLastName('User');
@@ -32,6 +24,26 @@ When("I enter user details with mismatched passwords", () => {
   SignUpPage.fillConfirmPassword('WrongPassword');
 });
 
+When("I signup with invalid email format", () => {
+  SignUpPage.fillFirstName('Test');
+  SignUpPage.fillLastName('User');
+  SignUpPage.fillEmail('testemail');
+  SignUpPage.fillPassword(testPassword);
+  SignUpPage.fillConfirmPassword(testPassword);
+})
+
+When("I submit the signup form", () => {
+  SignUpPage.submit();
+});
+
+Then("I should see success message or logged in", () => {
+  cy.contains('Thank you for registering').should('exist');
+});
+
 Then("I should see an error for password mismatch", () => {
   cy.contains('Please enter the same value again.').should('exist');
+});
+
+Then("I should see invalid email format error message", () => {
+  cy.contains('Please enter a valid email address').should('exist');
 });
