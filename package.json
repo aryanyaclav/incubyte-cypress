@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "framework for incubyte to automate signup and login flow",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "bdd": "cypress open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^14.4.1"
+    "@badeball/cypress-cucumber-preprocessor": "^21.0.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "cypress": "^13.17.0",
+    "esbuild": "^0.19.12"
   }
 }
