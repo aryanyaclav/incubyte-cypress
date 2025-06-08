@@ -5,3 +5,9 @@ Feature: User Login
         When I enter valid credentials
         And I click login button
         Then I should be logged in succesfully
+
+    Scenario: Login with invalid password
+        Given I am at login page
+        When I enter invalid password
+        And I click login button
+        Then I should see a invalid password message
