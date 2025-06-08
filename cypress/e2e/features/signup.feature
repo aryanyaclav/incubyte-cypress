@@ -1,7 +1,13 @@
 Feature: User Sign Up
 
-    Scenario: succesfull signup with valid credentials
+    Scenario: Succesfull signup with valid credentials
         Given I am on the signup page
         When I fill in valid registration details
-        And I submit the registration form
+        And I submit the signup form
         Then I should see success message or logged in
+
+    Scenario: Signup with mismatched passwords
+        Given I am on the signup page
+        When I enter user details with mismatched passwords
+        And I submit the signup form
+        Then I should see an error for password mismatch
