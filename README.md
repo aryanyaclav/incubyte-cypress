@@ -1,4 +1,4 @@
-#Incubyte-Cypress
+# Incubyte-Cypress
 
 This project contains an automated end-to-end test suite for the Incubyte assessment task.
 
