@@ -34,6 +34,14 @@ class SignUpPage {
     submit() {
         cy.get('.action.submit.primary').click();
     }
+
+    logout() {
+    cy.get('.customer-welcome').first().click();
+
+    cy.contains('Sign Out').click();
+
+    cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
+    }
 }
 
 export default new SignUpPage();

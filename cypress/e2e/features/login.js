@@ -1,20 +1,46 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import LoginPage from "../page_objects/LoginPage";
+import SignUpPage from "../page_objects/SignUpPage";
 
-email = 'test12345@email.com';
-password = 'Test@1234';
+let registeredUser = {};
+
+// hook to register the user before login
+before(() => {
+  const timestamp = Date.now();
+  registeredUser = {
+    email: `user${timestamp}@test.com`,
+    password: 'Test@12345',
+    firstName: `Test${timestamp}`,
+    lastName: `User${timestamp}`,
+  };
+
+  console.log(registeredUser);
+
+  SignUpPage.visit();
+  SignUpPage.fillFirstName(registeredUser.firstName);
+  SignUpPage.fillLastName(registeredUser.lastName);
+  SignUpPage.fillEmail(registeredUser.email);
+  SignUpPage.fillPassword(registeredUser.password);
+  SignUpPage.fillConfirmPassword(registeredUser.password);
+  SignUpPage.submit();
+  
+  // logout user after registration
+  SignUpPage.logout();
+});
+
 
 Given("I am at login page", () => {
     LoginPage.visit();
 });
 
 When("I enter valid credentials", () => {
-    LoginPage.fillEmail(email);
-    LoginPage.fillPassword(password);
+    
+    LoginPage.fillEmail(registeredUser.email);
+    LoginPage.fillPassword(registeredUser.password);
 });
 
 When("I enter invalid password", () => {
-    LoginPage.fillEmail(email);
+    LoginPage.fillEmail(registeredUser.email);
     LoginPage.fillPassword('Test@123');
 });
 
