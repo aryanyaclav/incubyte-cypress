@@ -17,3 +17,15 @@ Feature: User Sign Up
         When I signup with invalid email format
         And I submit the signup form
         Then I should see invalid email format error message
+
+    Scenario: Signup with short password
+        Given I am on the signup page
+        When I signup with short password
+        And I submit the signup form
+        Then I should see short password error message
+
+    Scenario: Signup with empty fields
+        Given I am on the signup page
+        When I signup with empty fields
+        And I submit the signup form
+        Then I should see required fields error message

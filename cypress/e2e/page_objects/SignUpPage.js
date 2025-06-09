@@ -23,6 +23,14 @@ class SignUpPage {
         cy.get('#password-confirmation').type(password);
     }
 
+    simulateEmptyFields() {
+        cy.get('#firstname').clear();
+        cy.get('#lastname').clear();
+        cy.get('#email_address').clear();
+        cy.get('#password').clear();
+        cy.get('#password-confirmation').clear();
+    }
+
     submit() {
         cy.get('.action.submit.primary').click();
     }

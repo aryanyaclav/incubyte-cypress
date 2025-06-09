@@ -32,6 +32,18 @@ When("I signup with invalid email format", () => {
   SignUpPage.fillConfirmPassword(testPassword);
 })
 
+When("I signup with short password", () => {
+  SignUpPage.fillFirstName('Test');
+  SignUpPage.fillLastName('User');
+  SignUpPage.fillEmail(testEmail);
+  SignUpPage.fillPassword('Test');
+  SignUpPage.fillConfirmPassword('Test');
+})
+
+When("I signup with empty fields", () => {
+  SignUpPage.simulateEmptyFields();
+})
+
 When("I submit the signup form", () => {
   SignUpPage.submit();
 });
@@ -46,4 +58,12 @@ Then("I should see an error for password mismatch", () => {
 
 Then("I should see invalid email format error message", () => {
   cy.contains('Please enter a valid email address').should('exist');
+});
+
+Then("I should see short password error message", () => {
+  cy.contains('Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.').should('exist');
+});
+
+Then("I should see required fields error message", () => {
+  cy.contains('This is a required field.').should('exist');
 });
