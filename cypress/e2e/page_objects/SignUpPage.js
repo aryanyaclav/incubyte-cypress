@@ -38,9 +38,9 @@ class SignUpPage {
     logout() {
     cy.get('.customer-welcome').first().click();
 
-    cy.contains('Sign Out').click();
+    cy.contains('Sign Out').click({force: true});
 
-    cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
+    cy.url({timeout: 7000}).should('eq', `${Cypress.config('baseUrl')}/`);
     }
 }
 

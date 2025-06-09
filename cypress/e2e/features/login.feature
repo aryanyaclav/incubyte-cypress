@@ -11,3 +11,14 @@ Feature: User Login
         When I enter invalid password
         And I click login button
         Then I should see a invalid password message
+
+    Scenario: Login with unregistered email
+        Given I am at login page
+        When I enter unregistered email
+        And I click login button
+        Then I should see unregistered email error
+
+    Scenario: Login with blank fields
+        Given I am at login page
+        When I click login button
+        Then I should see required fields error

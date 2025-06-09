@@ -1,6 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import LoginPage from "../page_objects/LoginPage";
 import SignUpPage from "../page_objects/SignUpPage";
+import { checkRequiredError } from "../../support/utils/validation";
 
 let registeredUser = {};
 
@@ -23,7 +24,7 @@ before(() => {
   SignUpPage.fillPassword(registeredUser.password);
   SignUpPage.fillConfirmPassword(registeredUser.password);
   SignUpPage.submit();
-  
+
   // logout user after registration
   SignUpPage.logout();
 });
@@ -44,6 +45,15 @@ When("I enter invalid password", () => {
     LoginPage.fillPassword('Test@123');
 });
 
+When("I enter unregistered email", () => {
+    LoginPage.fillEmail('4Vh0t@example.com');
+    LoginPage.fillPassword(registeredUser.password);
+});
+
+When("I leave email and password blank", () => {
+    LoginPage.simulateEmptyFields();
+});
+
 When("I click login button", () => {
     LoginPage.submit();
 });
@@ -54,4 +64,13 @@ Then("I should be logged in succesfully", () => {
 
 Then("I should see a invalid password message", () => {
     cy.contains('The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.').should('exist');
+})
+
+Then("I should see unregistered email error", () => {
+    cy.contains('The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.').should('exist');
+})
+
+Then("I should see required fields error", () => {
+    
+    checkRequiredError();
 })

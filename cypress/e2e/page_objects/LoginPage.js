@@ -11,6 +11,11 @@ class LoginPage {
     submit() {
         cy.get('.action.login.primary').click();
     }
+
+    simulateEmptyFields() {
+        cy.get('#email').clear();
+        cy.get('#pass').clear();
+    }
 }
 
 export default new LoginPage();
