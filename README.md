@@ -14,7 +14,7 @@ Tests are executed on the [Magento demo website](https://magento.softwaretesting
 
 
 # Project Structure
-
+```bash
 incubyte-cypress/
 ├── cypress/
 │ ├── e2e/
@@ -30,6 +30,7 @@ incubyte-cypress/
 ├── cypress.config.js # Cypress config
 ├── package.json
 └── README.md
+```
 
 
 # Installation and setup
@@ -41,10 +42,8 @@ cd incubyte-cypress
 npm install
 
 npx cypress run
-
-
-# Future milestones
-
+```
+# Future Milestones
 CI/CD Integration
 Integrate the test suite with GitHub Actions for automated test execution on every merge.
 
