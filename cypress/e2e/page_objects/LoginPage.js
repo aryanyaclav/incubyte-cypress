@@ -1,3 +1,5 @@
+//Page object class for login page
+
 class LoginPage {
     visit() {
         cy.visit("/customer/account/login/");

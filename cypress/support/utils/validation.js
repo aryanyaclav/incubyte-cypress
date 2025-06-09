@@ -1,4 +1,4 @@
-// cypress/support/utils/validation.js
+// Helper function to check for required field errors
 export function checkRequiredError() {
   cy.get('body').then(($body) => {
     if ($body.find('.mage-error').length) {

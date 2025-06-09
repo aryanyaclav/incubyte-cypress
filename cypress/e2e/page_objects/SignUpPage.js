@@ -1,3 +1,5 @@
+// Page object class for Signup page
+
 class SignUpPage {
     visit() {
         cy.visit("/customer/account/create/");
@@ -36,11 +38,11 @@ class SignUpPage {
     }
 
     logout() {
-    cy.get('.customer-welcome').first().click();
+        cy.get('.customer-welcome').first().click();
 
-    cy.contains('Sign Out').click({force: true});
+        cy.contains('Sign Out').click({force: true});
 
-    cy.url({timeout: 7000}).should('eq', `${Cypress.config('baseUrl')}/`);
+        cy.url({timeout: 7000}).should('eq', `${Cypress.config('baseUrl')}/`);
     }
 }
 
