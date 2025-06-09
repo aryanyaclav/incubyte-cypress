@@ -29,3 +29,10 @@ Feature: User Sign Up
         When I signup with empty fields
         And I submit the signup form
         Then I should see required fields error message
+
+    @alreadyRegisteredSignup
+    Scenario: Signup with already registered email
+        Given I am on the signup page
+        When I signup with already registered email
+        And I submit the signup form
+        Then I should see already registered email error message

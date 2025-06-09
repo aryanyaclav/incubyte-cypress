@@ -1,8 +1,31 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Before } from "@badeball/cypress-cucumber-preprocessor";
 import SignUpPage from '../page_objects/SignUpPage';
 
 let testEmail = `testuser_${Date.now()}@example.com`;
 let testPassword = 'Test@12345';
+let registeredUser = {};
+
+Before({tags: "@alreadyRegisteredSignup"},() => {
+      const timestamp = Date.now();
+      registeredUser = {
+        email: `user${timestamp}@test.com`,
+        password: 'Test@12345',
+        firstName: `Test${timestamp}`,
+        lastName: `User${timestamp}`,
+      };
+    
+      SignUpPage.visit();
+      SignUpPage.fillFirstName(registeredUser.firstName);
+      SignUpPage.fillLastName(registeredUser.lastName);
+      SignUpPage.fillEmail(registeredUser.email);
+      SignUpPage.fillPassword(registeredUser.password);
+      SignUpPage.fillConfirmPassword(registeredUser.password);
+      SignUpPage.submit();
+    
+      // logout user after registration
+      SignUpPage.logout();
+})
 
 Given("I am on the signup page", () => {
   SignUpPage.visit();
@@ -44,6 +67,14 @@ When("I signup with empty fields", () => {
   SignUpPage.simulateEmptyFields();
 })
 
+When("I signup with already registered email", () => {
+  SignUpPage.fillFirstName(registeredUser.firstName);
+  SignUpPage.fillLastName(registeredUser.lastName);
+  SignUpPage.fillEmail(registeredUser.email);
+  SignUpPage.fillPassword(registeredUser.password);
+  SignUpPage.fillConfirmPassword(registeredUser.password);
+})
+
 When("I submit the signup form", () => {
   SignUpPage.submit();
 });
@@ -66,4 +97,8 @@ Then("I should see short password error message", () => {
 
 Then("I should see required fields error message", () => {
   cy.contains('This is a required field.').should('exist');
+});
+
+Then("I should see already registered email error message", () => {
+  cy.contains('There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.').should('exist');
 });

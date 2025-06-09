@@ -15,8 +15,6 @@ before(() => {
     lastName: `User${timestamp}`,
   };
 
-  console.log(registeredUser);
-
   SignUpPage.visit();
   SignUpPage.fillFirstName(registeredUser.firstName);
   SignUpPage.fillLastName(registeredUser.lastName);
